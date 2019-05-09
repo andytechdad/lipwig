@@ -1,5 +1,6 @@
 from flask import Flask
-from core import simple
+from core import index
+from core import health
 from yaml import load
 
 app = Flask(__name__)
@@ -19,10 +20,15 @@ def get_version(config_file):
     return version
 
 @app.route("/")
-def hello():
+def default_index():
     version = get_version(config_file)
-    hello_world = simple.hello_world(version)
-    return hello_world
+    default = index.return_help(version)
+    return default
+
+@app.route("/healthcheck")
+def healthchecker():
+    healthcheck_output = health.health_data()
+    return healthcheck_output
 
 if __name__ == "__main__":
     # Only for debugging while developing
