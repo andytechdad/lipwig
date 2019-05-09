@@ -1,3 +1,6 @@
-def hello_world():
-    hello_world = "Welcome to Lipwig."
-    return hello_world
+import json
+
+def hello_world(version):
+    hello_world = "Welcome to Lipwig. Version:" + str(version)
+    output = json.dumps(hello_world)
+    return output
